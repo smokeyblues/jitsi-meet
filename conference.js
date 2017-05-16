@@ -82,7 +82,10 @@ import {VIDEO_CONTAINER_TYPE} from "./modules/UI/videolayout/VideoContainer";
  */
 window.JitsiMeetScreenObtainer = {
     openDesktopPicker(onSourceChoose) {
-        APP.store.dispatch(showDesktopPicker(onSourceChoose));
+        APP.store.dispatch(showDesktopPicker(id => {
+            APP.conference.screenSharingInfo.id = id;
+            onSourceChoose(id);
+        }));
     }
 };
 
@@ -533,6 +536,7 @@ export default {
     audioMuted: false,
     videoMuted: false,
     isSharingScreen: false,
+    screenSharingInfo: {},
     isDesktopSharingEnabled: false,
     /*
      * Whether the local "raisedHand" flag is on.

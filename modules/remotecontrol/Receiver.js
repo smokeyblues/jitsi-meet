@@ -260,6 +260,7 @@ export default class Receiver extends RemoteControlParticipant {
                 type: EVENT_TYPES.permissions,
                 action: PERMISSIONS_ACTIONS.grant
             });
+            this._sendStartAPIEvent();
         } else {
             APP.conference.toggleScreenSharing();
             APP.conference.screenSharingPromise.then(() => {
@@ -268,6 +269,7 @@ export default class Receiver extends RemoteControlParticipant {
                         type: EVENT_TYPES.permissions,
                         action: PERMISSIONS_ACTIONS.grant
                     });
+                    this._sendStartAPIEvent();
                 } else {
                     this.sendRemoteControlEvent(userId, {
                         type: EVENT_TYPES.permissions,
@@ -284,6 +286,19 @@ export default class Receiver extends RemoteControlParticipant {
     }
 
     /**
+     * Sends remote control event of type start.
+     *
+     * @returns {void}
+     */
+    _sendStartAPIEvent() {
+        transport.sendEvent({
+            name: REMOTE_CONTROL_EVENT_NAME,
+            type: EVENT_TYPES.start,
+            id: APP.conference.screenSharingInfo.id
+        });
+    }
+
+    /**
      * Handles remote control events from the external app. Currently only
      * events with type = EVENT_TYPES.supported or EVENT_TYPES.permissions.
      *
@@ -297,6 +312,9 @@ export default class Receiver extends RemoteControlParticipant {
             break;
         case EVENT_TYPES.supported:
             this._onRemoteControlSupported();
+            break;
+        case EVENT_TYPES.stop:
+            this.stop();
             break;
         }
     }

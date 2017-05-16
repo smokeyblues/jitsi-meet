@@ -18,6 +18,7 @@ export const EVENT_TYPES = {
     keydown: "keydown",
     keyup: "keyup",
     permissions: "permissions",
+    start: "start",
     stop: "stop",
     supported: "supported"
 };
