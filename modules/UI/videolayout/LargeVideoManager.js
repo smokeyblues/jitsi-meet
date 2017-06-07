@@ -64,9 +64,9 @@ export default class LargeVideoManager {
          * Cache the aspect ratio of the video displayed to detect changes to
          * the aspect ratio on video resize events.
          *
-         * @type {null|number}
+         * @type {number}
          */
-        this._videoAspectRatio = null;
+        this._videoAspectRatio = 0;
 
         this.$container = $('#largeVideoContainer');
 
@@ -110,7 +110,6 @@ export default class LargeVideoManager {
         window.clearInterval(this._updateVideoResolutionInterval);
         this.videoContainer.removeResizeListener(
             this._onVideoResolutionUpdate);
-        this._videoAspectRatio = null;
     }
 
     onHoverIn (e) {
