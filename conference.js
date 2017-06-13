@@ -1118,6 +1118,12 @@ export default {
     },
 
     videoSwitchInProgress: false,
+
+    /**
+     * Toggles between screensharing and camera video.
+     * @param {boolean} [shareScreen]
+     * @return {Promise.<T>}
+     */
     toggleScreenSharing(shareScreen = !this.isSharingScreen) {
         if (this.videoSwitchInProgress) {
             logger.warn("Switch in progress.");
@@ -1137,7 +1143,7 @@ export default {
         let externalInstallation = false;
 
         if (shareScreen) {
-            this.screenSharingPromise = createLocalTracks({
+            return createLocalTracks({
                 devices: ['desktop'],
                 desktopSharingExtensionExternalInstallation: {
                     interval: 500,
@@ -1227,7 +1233,7 @@ export default {
             });
         } else {
             APP.remoteControl.receiver.stop();
-            this.screenSharingPromise = createLocalTracks(
+            return createLocalTracks(
                 { devices: ['video'] })
             .then(
                 ([stream]) => this.useVideoStream(stream)
