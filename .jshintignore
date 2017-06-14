@@ -17,5 +17,6 @@ react/
 # not supersede JSHint but take advantage of advanced language features such as
 # Facebook Flow which are not supported by JSHint.
 modules/translation/translation.js
+app.js
 
 analytics.js
