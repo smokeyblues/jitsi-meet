@@ -23,13 +23,6 @@ export settings from "./modules/settings/Settings";
 export translation from "./modules/translation/translation";
 export UI from "./modules/UI/UI";
 
-/**
- * After the APP has been initialized provides utility methods for dealing
- * with the conference room URL(address).
- * @type ConferenceUrl
- */
-export let ConferenceUrl = null;
-
 // Used by do_external_connect.js if we receive the attach data after
 // connect was already executed. status property can be "initialized",
 // "ready" or "connecting". We are interested in "ready" status only which
@@ -41,24 +34,10 @@ export const connect = {
     handler: null
 };
 
-export let connection = null;
-
 // Used for automated performance tests
 export const connectionTimes = {
     "index.loaded": window.indexLoadedTime
 };
-
-/**
- * The log collector which captures JS console logs for this app.
- * @type {LogCollector}
- */
-export let logCollector = null;
-
-/**
- * Indicates if the log collector has been started (it will not be started
- * if the welcome page is displayed).
- */
-export let logCollectorStarted = false;
 
 // TODO The execution of the mobile app starts from react/index.native.js.
 // Similarly, the execution of the Web app should start from react/index.web.js
